@@ -1,0 +1,58 @@
+# Netlify "kitchen sink" example: https://github.com/netlify/netlify-cms/blob/master/dev-test/config.yml
+
+localhost_development:
+  backend:
+    name: file-system
+    api_root: /api
+  display_url: http://localhost:8000
+  publish_mode: simple
+
+backend:
+  name: github
+  repo: erikdstock/gatsby-starter-ts-mdx # change
+  branch: master
+
+media_folder: static/assets
+public_folder: assets
+site_url: https://festive-villani-316b3c.netlify.com
+publish_mode: editorial_workflow
+
+collections:
+  # A Collection with a fixed group of pages (files)
+  - name: pages
+    label: Pages
+    format: frontmatter
+    files:
+      - file: "content/pages/about.mdx"
+        label: "About"
+        name: "about"
+        # All fields except `body` will be rendered as frontmatter for markdown posts
+        fields:
+          - {
+              label: "Collection Name",
+              name: "collectionName",
+              default: "pages",
+              widget: "hidden", # Just stick this value^ on the frontmatter
+            }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "mdx" }
+  # A not-fixed collection uses the `folder` path relative to root
+  - name: blog
+    label: Blog
+    format: frontmatter # Files get a yaml frontmatter section (everything but body field)
+    create: true # Allowed to create new files; used with `folder|extension|format|slug` below (rather than `files` array)
+    folder: content/blog # Where to look and save
+    extension: "mdx" # Format to find and save
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {
+          label: "Collection Name",
+          name: "collectionName",
+          widget: "hidden",
+          default: "blog",
+        }
+      - { label: Title, name: title, widget: string }
+      - { label: Publish Date, name: date, widget: datetime }
+      - { label: Description, name: description, widget: text }
+      - { label: Tags, name: tags, widget: list }
+      - { label: Body, name: body, widget: mdx }
