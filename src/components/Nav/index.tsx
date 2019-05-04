@@ -88,14 +88,7 @@ const Nav: React.FunctionComponent<{ siteTitle: string; pages: Article[] }> = ({
 }) => {
   const navTree = makeTree(pages)
   return (
-    <Flex
-      style={{ height: "100%" }}
-      p={3}
-      flexDirection="column"
-      bg="gray.2"
-      mb="1.45rem"
-      flex="1 0 auto"
-    >
+    <Flex p={3} flexDirection="column" bg="gray.2" mb="1.45rem" flex="1 0 auto">
       <Box my={0} mx="auto" p="1.45rem 1.0875rem">
         <Link
           to="/"
