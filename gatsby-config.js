@@ -3,7 +3,7 @@ const mdxFeed = require("gatsby-mdx/feed")
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby 2019`,
+    title: `Nesty Nav`,
     siteUrl: `https://festive-villani-316b3c.netlify.com`,
     description: `A gatsby starter using Typescript, Netlify-CMS, MDX and Netlify
     Inspired by https://github.com/damassi/gatsby-starter-typescript-rebass-netlifycms`,

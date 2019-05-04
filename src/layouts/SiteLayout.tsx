@@ -16,52 +16,30 @@ const PageHeight = styled(Flex)`
 
 const Layout = ({ children }) => (
   <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-        pages: allMdx(
-          filter: { frontmatter: { collectionName: { ne: "blog" } } }
-        ) {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                collectionName
-              }
-            }
-          }
-        }
-      }
-    `}
+    query={staticQuery}
     render={data => (
-      <PageHeight flexDirection="row">
-        <Nav
-          siteTitle={data.site.siteMetadata.title}
-          pages={data.pages.edges.map(e => e.node)}
-        />
+      <PageHeight flexDirection="column">
+        <Flex flexDirection="row" flex="1 0 auto">
+          <Nav
+            siteTitle={data.site.siteMetadata.title}
+            pages={data.pages.edges.map(e => e.node)}
+          />
 
-        <PageContent
-          alignSelf="center"
-          width={[1, 0.95, 0.9]}
-          maxWidth="1080px"
-        >
-          <Box p="0px 1.0875rem 1.45rem">
-            <main>{children}</main>
-          </Box>
-        </PageContent>
-        <Box py={2} px={[1, 2, 5]} margin="auto 0 0 0">
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
+          <PageContent
+            pt={4}
+            px={3}
+            pb={3}
+            width={[1, 0.95, 0.9]}
+            maxWidth="1080px"
+            as="main"
+          >
+            {children}
+          </PageContent>
+        </Flex>
+        <Box as="footer" py={1} px={[1, 2, 5]} margin="auto 0 0 0">
+          © {new Date().getFullYear()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
         </Box>
       </PageHeight>
     )}
@@ -71,5 +49,29 @@ const Layout = ({ children }) => (
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
+
+const staticQuery = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    pages: allMdx(filter: { frontmatter: { collectionName: { ne: "blog" } } }) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            collectionName
+            ordering
+          }
+        }
+      }
+    }
+  }
+`
 
 export default Layout
