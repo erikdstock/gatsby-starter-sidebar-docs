@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 import { Box, Flex } from "rebass"
 import { maxWidth, MaxWidthProps } from "styled-system"
-import Nav from "../components/Nav"
+import { Nav } from "../components/Nav"
 import styled from "styled-components"
 
 const PageContent = styled(Box)<MaxWidthProps>`
