@@ -3,10 +3,9 @@ const mdxFeed = require("gatsby-mdx/feed")
 
 module.exports = {
   siteMetadata: {
-    title: `Nesty Nav`,
-    siteUrl: `https://festive-villani-316b3c.netlify.com`,
-    description: `A gatsby starter using Typescript, Netlify-CMS, MDX and Netlify
-    Inspired by https://github.com/damassi/gatsby-starter-typescript-rebass-netlifycms`,
+    title: `Sidebar Docs`,
+    siteUrl: `https://quizzical-babbage-45160a.netlify.com`,
+    description: `A docs-focused gatsby starter using Typescript, Netlify-CMS, MDX and Netlify-CMS`,
     author: `@erikdstock`,
   },
   plugins: [

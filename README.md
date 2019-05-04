@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/09b68422-f4b0-4a28-8fe7-c6fdf05fae79/deploy-status)](https://app.netlify.com/sites/festive-villani-316b3c/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cb3b5fc0-3885-4e54-9a1a-7d987abe8f9b/deploy-status)](https://app.netlify.com/sites/quizzical-babbage-45160a/deploys)
 
 <h1 align="center">
   Sidebar Docs Gatsby starter
@@ -6,7 +6,8 @@
 
 This gatsby starter features a sidebar that allows for documentation or pages
 reasonably organized into sections or sub-menus. It also features typescript
-support, MDX, theming with [rebass.js](https://rebassjs.org/), and netlify-cms.
+support, MDX, theming with [rebass.js](https://rebassjs.org/), and
+[netlify-cms](https://www.netlifycms.org/).
 
 In broad strokes:
 

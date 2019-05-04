@@ -9,12 +9,12 @@ localhost_development:
 
 backend:
   name: github
-  repo: erikdstock/gatsby-starter-ts-mdx # change
+  repo: erikdstock/gatsby-starter-sidebar-docs # change
   branch: master
 
 media_folder: static/assets
 public_folder: assets
-site_url: https://festive-villani-316b3c.netlify.com
+site_url: https://quizzical-babbage-45160a.netlify.com
 publish_mode: editorial_workflow
 
 collections:
