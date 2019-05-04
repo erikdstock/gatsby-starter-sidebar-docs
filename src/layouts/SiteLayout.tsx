@@ -57,11 +57,15 @@ const staticQuery = graphql`
         title
       }
     }
-    pages: allMdx(filter: { frontmatter: { collectionName: { ne: "blog" } } }) {
+    # Pages query
+    pages: allMdx(
+      filter: { frontmatter: { collectionName: { eq: "pages" } } }
+    ) {
       edges {
         node {
           fields {
             slug
+            sectionName
           }
           frontmatter {
             title

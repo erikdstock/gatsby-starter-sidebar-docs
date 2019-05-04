@@ -35,14 +35,47 @@ collections:
               widget: "hidden", # Just stick this value^ on the frontmatter
             }
           - { label: "Title", name: "title", widget: "string" }
+          - {
+              label: "Ordering",
+              name: "ordering",
+              widget: "number",
+              valueType: "float",
+            }
           - { label: "Body", name: "body", widget: "mdx" }
+
   # A not-fixed collection uses the `folder` path relative to root
-  - name: blog
-    label: Blog
+  - name: sectionOne
+    label: Section One
     format: frontmatter # Files get a yaml frontmatter section (everything but body field)
     create: true # Allowed to create new files; used with `folder|extension|format|slug` below (rather than `files` array)
-    folder: content/blog # Where to look and save
+    folder: content/pages/section-one # Where to look and save
     extension: "mdx" # Format to find and save
+    slug: "{{slug}}"
+    fields:
+      - {
+          label: "Collection Name",
+          name: "collectionName",
+          widget: "hidden",
+          default: "pages",
+        }
+      - { label: Title, name: title, widget: string }
+      - { label: Publish Date, name: date, widget: datetime }
+      - {
+          label: Ordering,
+          name: "ordering",
+          widget: "number",
+          valueType: "float",
+        }
+      - { label: Description, name: description, widget: text }
+      - { label: Tags, name: tags, widget: list }
+      - { label: Body, name: body, widget: mdx }
+
+  - name: blog
+    label: Blog
+    format: frontmatter
+    create: true
+    folder: content/blog
+    extension: "mdx"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {

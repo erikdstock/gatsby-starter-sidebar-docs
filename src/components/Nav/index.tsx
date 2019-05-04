@@ -10,27 +10,27 @@ import directory from "./directory"
 // function isBranch(n: Node): n is Branch {
 //   return (n as Branch).title !== undefined
 // }
-interface Branch {
+interface Section {
   title: string
-  articles: Article[]
+  articles: Page[]
 }
 
-interface Article {
+interface Page {
   frontmatter: {
-    collectionName: string
     title: string
     ordering: number
   }
-  fields: { slug: string }
+  fields: {
+    slug: string
+    sectionName: string
+  }
 }
 
-type Node = Branch | Article
-
-type NavLinks = Node[]
+type NavNode = Section | Page
 
 export const Nav: React.FunctionComponent<{
   siteTitle: string
-  pages: Article[]
+  pages: Page[]
 }> = ({ siteTitle, pages }) => {
   const navTree = makeTree(pages)
   return (
@@ -71,7 +71,7 @@ export const Nav: React.FunctionComponent<{
 }
 
 const SubMenu: React.FunctionComponent<{
-  branch: Branch
+  branch: Section
   show?: boolean
 }> = ({ branch, show = true }) => (
   <Box pb={2}>
@@ -95,30 +95,30 @@ const SubMenu: React.FunctionComponent<{
   </Box>
 )
 
-function makeTree(pages: Article[]): NavLinks {
-  // Group articles by collection name
-  const grouped: { [k: string]: Article[] } = groupBy(
+function makeTree(pages: Page[]): NavNode[] {
+  // Group articles by sectionName (see gatsby-node.js)
+  const groupedPages: { [k: string]: Page[] } = groupBy(
     pages,
-    p => p.frontmatter.collectionName
+    p => p.fields.sectionName
   )
-  const ordered = Object.keys(grouped).reduce((acc, k) => {
-    const withOrder = grouped[k].sort(
+  const orderedPages = Object.keys(groupedPages).reduce((acc, k) => {
+    const withOrder = groupedPages[k].sort(
       (a, b) => a.frontmatter.ordering - b.frontmatter.ordering
     )
     return { ...acc, [k]: withOrder }
   }, {})
 
   // Grab the `pages` (top-level articles) collection
-  const navLinks: NavLinks = ordered["pages"]
+  const navLinks: NavNode[] = orderedPages["pages"]
 
   // Append sections to them
-  return Object.keys(ordered)
-    .filter(collectionName => collectionName !== "pages")
+  return Object.keys(orderedPages)
+    .filter(sectionName => sectionName !== "pages")
     .reduce(
-      (acc, collectionName) =>
+      (acc, sectionName) =>
         acc.concat({
-          title: directory[collectionName] || collectionName,
-          articles: ordered[collectionName],
+          title: directory[sectionName] || sectionName,
+          articles: orderedPages[sectionName],
         }),
       navLinks
     )

@@ -14,13 +14,27 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === "Mdx") {
     // relativePath (relative to the `/content` dir) is used to resolve basePath down below.
 
-    const inPages = node.fileAbsolutePath.split(path.sep).includes("docs")
+    const inPages = node.fileAbsolutePath.split(path.sep).includes("pages")
 
-    // The `docs` collection are top-level pages. Other collections will
+    // The `pages` collection are top-level pages. Other collections will
     // be routed by their `collectionName`
-    const prependPagePath = inPages
-      ? "/"
-      : `/${node.frontmatter.collectionName}`
+
+    let prependPagePath
+
+    if (inPages) {
+      prependPagePath = "/"
+      const sectionName = path
+        .dirname(node.fileAbsolutePath)
+        .split(path.sep)
+        .reverse()[0]
+      createNodeField({
+        node,
+        name: `sectionName`,
+        value: sectionName,
+      })
+    } else {
+      prependPagePath = `/${node.frontmatter.collectionName}`
+    }
 
     const slug = path.join(
       prependPagePath,
