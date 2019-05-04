@@ -20,6 +20,6 @@ In broad strokes:
     collection in the sidebar.
   - `/src/components/Nav/directory.js` is just a mapping of names for nav
     sections. The keys in these sections should match the folder containing your
-    mdx files - in this starter `section-one: "Section One` matches files in
-    `/content/pages/section-one`.
+    mdx files - in this starter `section-one: "Section One"` means that files in
+    `/content/pages/section-one` will be listed under the "Section One" header.
 - `/content/blog` could hold something else.
