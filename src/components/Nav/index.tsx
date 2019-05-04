@@ -34,7 +34,7 @@ export const Nav: React.FunctionComponent<{
 }> = ({ siteTitle, pages }) => {
   const navTree = makeTree(pages)
   return (
-    <Flex p={3} flexDirection="column" bg="gray.2" mb="1.45rem" flex="1 0 auto">
+    <Flex p={3} flexDirection="column" bg="gray.2" mb="1.45rem" flex="0 0 auto">
       <Box my={0} mx="auto" p="1.45rem 1.0875rem">
         <Link
           to="/"
